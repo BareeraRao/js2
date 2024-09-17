@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Printer</title>
+    <style>
+        body {
+            background-color: #222;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            width: 80px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #displayTable {
+            margin-top: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            white-space: pre-wrap;
+            line-height: 1.8em;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: #333;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Multiplication Table Printer</h1>
+        <label for="numbertoPrint">Which table would you like to print?</label>
+        <input id="numbertoPrint" type="number" placeholder="Enter a number">
+
+        <label for="minLength">Starting from:</label>
+        <input id="minLength" type="number" placeholder="Min value">
+
+        <label for="maxLength">Ending at:</label>
+        <input id="maxLength" type="number" placeholder="Max value">
+
+        <div>
+            <button onclick="printTable()">Print Table</button>
+            <button onclick="refresh()">Refresh</button>
+        </div>
+
+        <div id="displayTable"></div>
+    </div>
+
+    <script>
+        function printTable() {
+            let table = document.getElementById("numbertoPrint").value;
+            let minLength = document.getElementById("minLength").value;
+            let maxLength = document.getElementById("maxLength").value;
+            let display = document.getElementById('displayTable');
+
+            // Clear previous results
+            display.innerHTML = "";
+
+            // Validation
+            if (table === "" || minLength === "" || maxLength === "" || minLength > maxLength) {
+                alert("Please enter valid inputs.");
+                return;
+            }
+
+            // Print the multiplication table
+            for (let i = minLength; i <= maxLength; i++) {
+                display.innerHTML += `${table} x ${i} = ${table * i}\n`;
+            }
+        }
+
+        function refresh() {
+            document.getElementById("numbertoPrint").value = "";
+            document.getElementById("minLength").value = "";
+            document.getElementById("maxLength").value = "";
+            document.getElementById('displayTable').innerHTML = "";
+        }
+    </script>
+</body>
+
+</html>
